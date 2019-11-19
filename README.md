@@ -11,7 +11,7 @@ and graphs the result using Google Drive API and gspread and matplotlib
 
 ## Result
 
-![Alt text](Screenshot/Figure_1.png)
+![Alt text](screenshot/Figure_1.png)
 
 ## Show have in dir when finished
 
