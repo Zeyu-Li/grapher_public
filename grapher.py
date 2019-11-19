@@ -1,13 +1,6 @@
 ''''
-Google Sheets Script for summarizing sheets documents
-Description: This is a script summarize and plot a graph from a lot of schedule files
-
-Note: most of code is from following Google's poorly documented documentation
-* https://developers.google.com/drive
-* https://developers.google.com/sheets/api
-
-ALso, using gspread; documentation bellow:
-* https://gspread.readthedocs.io/en/latest/
+Grapher - By Andrew Li
+graphing program that graphs data in data.json as a pie graph with labels
 '''
 
 # matplotlib + numpy

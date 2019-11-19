@@ -38,12 +38,14 @@ def main():
     # builds service interaction
     service = pickler(SCOPES)
 
-    # inits top folder
-    top_folder_id = '1KSX4cuQBzc872u61WncSGDe-7duFKOYV'
-    template ="'1AchBcJEBQ1jCVTR91rxsRrNvNIwZ4aZ91X5tFbFGpe4'"
-    categories = 'Homework', 'School', 'Coding', 'Workout', 'Misc/Sport', 'YouTube', 'Waste of Time', 'Food', 'Sleep'
+    # inits top folder/dir
+    top_folder_id = 'wf2ny4we'
+    # the single template non-use sheet so it is not included in summary
+    template ='y3ny4we'
     file_ids= []
     
+    # if data exists, take the previous data and add to that 
+    # otherswise, create array of 0s
     try:
         with open('data.json', 'r') as fp:
             data_set = json.load(fp)
@@ -54,15 +56,28 @@ def main():
     # gets all files in folder
     folders = print_files_in_folder(service, top_folder_id)
 
+    # get all Google sheets files
+    # this is to extact a structure that is displayed below
+    # top_folder_id
+    #   ↳ template - will not be included
+    #   ↳ April
+    #       ↳19th-25th
+    #       ↳25th-31st
+    #   ↳ May
+    #       ↳10th-15th
+    #       15th-20th etc.
     for folder in folders:
         if folder != template:
             files = print_files_in_folder(service, folder)
             for file_id in files:
                 file_ids.append(file_id)
 
+    # gets data from all worksheets in Google Sheets file
     data = sheets(file_ids, SCOPES)
 
 
+    # formate data so it is a list of numbers 
+    # which each number is a # of hours in category
     for w in range(len(data[0])):
         column = 0
         for h in range(len(data)):
@@ -71,6 +86,7 @@ def main():
         data_set[w] += column
 
 
+    # open data.json and write to it
     with open('data.json', 'w') as fp:
         json.dump(data_set, fp)
 
@@ -83,6 +99,7 @@ def sheets(file_ids, SCOPES):
     # inits 
     data = []
 
+    # inits creds and authorization
     credentials = ServiceAccountCredentials.from_json_keyfile_name('sheets.json', SCOPES)
     gc = gspread.authorize(credentials)
 
@@ -105,6 +122,8 @@ def sheets(file_ids, SCOPES):
         sh = gc.open_by_key(file_id)
         worksheet_list = sh.worksheets()
         for worksheet in worksheet_list:
+            # change range so you pull data from different cells
+            # *Note the 500 requests/ 100 seconds limit for Google API
             data.append(worksheet.range('L9:L17'))
 
 

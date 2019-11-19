@@ -1,5 +1,5 @@
 
-# Google Sheets Summarizer using Google Drive API and gspread and matplotlib
+# Google Sheets Summarizer
 
 ## About
 
@@ -7,9 +7,9 @@ This project uses Google's poorly documented API to
 clone a defined template and clone it to another folder
 
 This project extracts data from a set of Google Sheets worksheets
-and graphs the result
+and graphs the result using Google Drive API and gspread and matplotlib
 
-## Show have when finished
+## Show have in dir when finished
 
  * credentials.json - credentials to access Google's API
  * sheets.json - Google sheets credentials
