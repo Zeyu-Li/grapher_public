@@ -9,6 +9,10 @@ clone a defined template and clone it to another folder
 This project extracts data from a set of Google Sheets worksheets
 and graphs the result using Google Drive API and gspread and matplotlib
 
+## Result
+
+![Alt text](Screenshot/Figure_1.png)
+
 ## Show have in dir when finished
 
  * credentials.json - credentials to access Google's API
